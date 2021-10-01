@@ -1,4 +1,5 @@
 const getDataButton = document.getElementById("getData");
+const malDataTBody = document.getElementById("malDataTBody");
 
 getDataButton.addEventListener("click", async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -9,7 +10,22 @@ getDataButton.addEventListener("click", async () => {
       function: getData,
     },
     ([{ result }]) => {
-      alert(JSON.stringify(result));
+      for (const key in result) {
+        const value = result[key];
+
+        const tr = document.createElement("tr");
+
+        const keyTD = document.createElement("td");
+        keyTD.textContent = key;
+        tr.appendChild(keyTD);
+
+        const ValueTD = document.createElement("td");
+        ValueTD.textContent = value;
+        ValueTD.className = "malDataTableValue";
+        tr.appendChild(ValueTD);
+
+        malDataTBody.appendChild(tr);
+      }
     }
   );
 });

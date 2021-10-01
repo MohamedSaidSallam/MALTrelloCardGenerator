@@ -1,7 +1,8 @@
 body {
-  width: 15em;
+  width: 40em;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 button {
   flex: 1;
@@ -12,4 +13,8 @@ button {
   border-radius: 2px;
 
   cursor: pointer;
+}
+
+.malDataTableValue{
+  word-break: break-word;
 }
