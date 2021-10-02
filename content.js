@@ -75,6 +75,10 @@ document.addEventListener(
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request === "addAnimeCard") {
     chrome.storage.sync.get("animeData", ({ animeData }) => {
+      if (!animeData) {
+        alert("Please copy a MAL page first");
+        return;
+      }
       addAnimeCard(
         `${animeData.title}[${animeData.score}][${animeData.epCount}ep]${
           animeData.englishTitle ? "(" + animeData.englishTitle + ")" : ""
@@ -82,7 +86,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         animeData.imageURL,
         animeData.malURL
       );
-      chrome.storage.sync.set({ animeData: undefined });
+      chrome.storage.sync.remove("animeData");
     });
   }
 });
