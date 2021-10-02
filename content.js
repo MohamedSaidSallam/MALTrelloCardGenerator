@@ -15,7 +15,19 @@ async function querySelectorPolling(selector, callback) {
   }
 }
 
-async function addAnimeCard(title, imageURL) {
+async function addAttachment(url) {
+  await querySelectorPolling(
+    "#chrome-container > div.window-overlay > div > div.window-wrapper.js-tab-parent > div > div.window-sidebar > div:nth-child(2) > div > a.button-link.js-attach",
+    (element) => element.click()
+  ); // click attachment button
+  await querySelectorPolling("#addLink", (element) => (element.value = url)); // fill attachment url
+  await querySelectorPolling(
+    "#chrome-container > div.pop-over.is-shown > div > div:nth-child(2) > div > div > div > input.js-add-attachment-url",
+    (element) => element.click()
+  ); // click attach button
+}
+
+async function addAnimeCard(title, imageURL, malURL) {
   const textBox = clickedEl;
   textBox.value = title;
   document
@@ -31,18 +43,9 @@ async function addAnimeCard(title, imageURL) {
   const newCard = cardsList.children[cardsList.childElementCount - 2];
   newCard.click();
 
-  await querySelectorPolling(
-    "#chrome-container > div.window-overlay > div > div.window-wrapper.js-tab-parent > div > div.window-sidebar > div:nth-child(2) > div > a.button-link.js-attach",
-    (element) => element.click()
-  ); // click attachment button
-  await querySelectorPolling(
-    "#addLink",
-    (element) => (element.value = imageURL)
-  ); // fill attachment url
-  await querySelectorPolling(
-    "#chrome-container > div.pop-over.is-shown > div > div:nth-child(2) > div > div > div > input.js-add-attachment-url",
-    (element) => element.click()
-  ); // click attach button
+  await addAttachment(imageURL);
+  await addAttachment(malURL);
+
   await querySelectorPolling(
     "#chrome-container > div.window-overlay > div > div.window-wrapper.js-tab-parent > div > div.window-cover.js-card-cover-box.js-stickers-area.js-open-card-cover-in-viewer.is-covered.has-attachment-cover > div.window-cover-menu > a",
     (element) => element.click()
@@ -76,7 +79,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         `${animeData.title}[${animeData.score}][${animeData.epCount}ep]${
           animeData.englishTitle ? "(" + animeData.englishTitle + ")" : ""
         }`,
-        animeData.imageURL
+        animeData.imageURL,
+        animeData.malURL
       );
       chrome.storage.sync.set({ animeData: undefined });
     });
