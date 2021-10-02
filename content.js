@@ -30,11 +30,7 @@ async function addAttachment(url) {
 async function addAnimeCard(title, imageURL, malURL) {
   const textBox = clickedEl;
   textBox.value = title;
-  document
-    .querySelector(
-      "#board > div:nth-child(1) > div > div.list-cards.u-fancy-scrollbar.u-clearfix.js-list-cards.js-sortable.ui-sortable > div > div.cc-controls.u-clearfix > div:nth-child(1) > input"
-    )
-    .click(); // click add card
+  textBox.parentNode.parentNode.nextSibling.firstElementChild.firstElementChild.click(); // click add card
 
   const cardsList = clickedEl.parentNode.parentNode.parentNode.parentNode;
 
