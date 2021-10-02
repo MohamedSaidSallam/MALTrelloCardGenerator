@@ -14,7 +14,7 @@
   ],
   "host_permissions": [
     "https://trello.com/*",
-    "https://myanimelist.net/*"
+    "https://myanimelist.net/anime/*"
   ],
   "action": {
     "default_popup": "popup.html",
