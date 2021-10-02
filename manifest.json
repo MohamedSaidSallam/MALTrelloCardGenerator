@@ -1,7 +1,7 @@
 {
   "name": "MAL Trello Card Generator",
-  "description": "Copy data from an open MAL page then paste it in a trello card. Copied Data Highlights(Title, Score, Episodes count, cover image url, ...)",
-  "version": "1.0",
+  "description": "Copy data from an open MAL page then paste it in a trello card. Copied Data Highlights(Title, Score, Episodes count, cover, ...)",
+  "version": "0.1.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
