@@ -6,8 +6,7 @@ chrome.contextMenus.removeAll();
 
 chrome.contextMenus.create({
   title: "Paste Mal Data",
-  // contexts: ["link"],
-  contexts: ["all"],
+  contexts: ["editable"],
   documentUrlPatterns: ["https://trello.com/*"],
   id: "PasteMalDataContextMenu",
 });
