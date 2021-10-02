@@ -13,6 +13,25 @@ const notMyAnimeListHeader = document.getElementById("notMyAnimeList");
   }
 })();
 
+function fillTable(result) {
+  for (const key in result) {
+    const value = result[key];
+
+    const tr = document.createElement("tr");
+
+    const keyTD = document.createElement("td");
+    keyTD.textContent = key;
+    tr.appendChild(keyTD);
+
+    const ValueTD = document.createElement("td");
+    ValueTD.textContent = value;
+    ValueTD.className = "malDataTableValue";
+    tr.appendChild(ValueTD);
+
+    malDataTBody.appendChild(tr);
+  }
+}
+
 getDataButton.addEventListener("click", async () => {
   const [tab] = await chrome.tabs.query({
     active: true,
@@ -25,22 +44,7 @@ getDataButton.addEventListener("click", async () => {
     },
     ([{ result }]) => {
       chrome.storage.local.set({ animeData: result });
-      for (const key in result) {
-        const value = result[key];
-
-        const tr = document.createElement("tr");
-
-        const keyTD = document.createElement("td");
-        keyTD.textContent = key;
-        tr.appendChild(keyTD);
-
-        const ValueTD = document.createElement("td");
-        ValueTD.textContent = value;
-        ValueTD.className = "malDataTableValue";
-        tr.appendChild(ValueTD);
-
-        malDataTBody.appendChild(tr);
-      }
+      fillTable(result);
     }
   );
 });
