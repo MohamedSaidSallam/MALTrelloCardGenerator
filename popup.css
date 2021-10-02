@@ -15,6 +15,12 @@ button {
   cursor: pointer;
 }
 
-.malDataTableValue{
+.malDataTableValue {
   word-break: break-word;
+}
+
+#notMyAnimeList {
+  color: crimson;
+  text-align: center;
+  display: none;
 }

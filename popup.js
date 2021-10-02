@@ -1,9 +1,23 @@
 const getDataButton = document.getElementById("getData");
 const malDataTBody = document.getElementById("malDataTBody");
+const notMyAnimeListHeader = document.getElementById("notMyAnimeList");
+
+(async () => {
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
+  if (!tab.url.startsWith("https://myanimelist.net/anime")) {
+    notMyAnimeListHeader.style.display = "block";
+    getDataButton.disabled = true;
+  }
+})();
 
 getDataButton.addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
   chrome.scripting.executeScript(
     {
       target: { tabId: tab.id },
