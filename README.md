@@ -3,7 +3,7 @@
 [![GitHub Release][github_release_badge]][github_release_link]
 [![License][license-image]][license-url]
 
-A chrome extension that copies data from an open MAL page then paste it in a trello card. Copied Data Highlights(Title, Score, Episodes count, cover image url, ...).
+A chrome extension that copies data from an open MAL page then paste it into a Trello card. Copied Data Highlights(Title, Score, Episodes count, cover image URL, ...).
 
 > Refresh Trello if it was open before installing the extension
 
