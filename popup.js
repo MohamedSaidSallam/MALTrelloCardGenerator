@@ -65,13 +65,15 @@ function getData() {
       .getAttribute("src"),
     malURL: window.location.href,
   };
-  data.epCount = document
-    .querySelector(
-      `#content > table > tbody > tr > td.borderClass > div > div:nth-child(${
-        data.englishTitle ? 14 : 13
-      })`
-    )
-    .textContent // '\n  Episodes:\n  12\n  '
+
+  const episodesDiv = document.evaluate(
+    "//h2[text()='Information']/following-sibling::*/following-sibling::*",
+    document,
+    null,
+    XPathResult.FIRST_ORDERED_NODE_TYPE,
+    null
+  ).singleNodeValue;
+  data.epCount = episodesDiv.textContent // '\n  Episodes:\n  12\n  '
     .trim() // 'Episodes:\n  12'
     .split("\n") //['Episodes:', '  12']
     .at(-1) //' 12'
