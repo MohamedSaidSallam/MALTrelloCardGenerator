@@ -9,8 +9,13 @@
   "permissions": [
     "storage",
     "activeTab",
-    "scripting"
-  ],  
+    "scripting",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://trello.com/*",
+    "https://myanimelist.net/*"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -26,5 +31,17 @@
     "48": "/images/icon48.png",
     "128": "/images/icon128.png"
   },
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
 }

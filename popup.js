@@ -10,6 +10,7 @@ getDataButton.addEventListener("click", async () => {
       function: getData,
     },
     ([{ result }]) => {
+      chrome.storage.sync.set({ animeData: result });
       for (const key in result) {
         const value = result[key];
 

@@ -1,6 +1,14 @@
-let color = "#3aa757";
+function addAnimeCard(info, tab) {
+  chrome.tabs.sendMessage(tab.id, "addAnimeCard", { frameId: info.frameId });
+}
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ color });
-  console.log("Default background color set to %cgreen", `color: ${color}`);
+chrome.contextMenus.removeAll();
+
+chrome.contextMenus.create({
+  title: "Paste Mal Data",
+  // contexts: ["link"],
+  contexts: ["all"],
+  documentUrlPatterns: ["https://trello.com/*"],
+  id: "PasteMalDataContextMenu",
 });
+chrome.contextMenus.onClicked.addListener(addAnimeCard);
