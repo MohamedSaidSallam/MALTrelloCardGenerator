@@ -74,7 +74,7 @@ document.addEventListener(
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request === "addAnimeCard") {
-    chrome.storage.sync.get("animeData", ({ animeData }) => {
+    chrome.storage.local.get("animeData", ({ animeData }) => {
       if (!animeData) {
         alert("Please copy a MAL page first");
         return;
@@ -86,7 +86,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         animeData.imageURL,
         animeData.malURL
       );
-      chrome.storage.sync.remove("animeData");
+      chrome.storage.local.remove("animeData");
     });
   }
 });
